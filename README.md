@@ -130,3 +130,4 @@ To run:
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.bookingsaga.TripBookingSaga
 
 
+Apache 2.0 License, please see [LICENSE](https://github.com/cadence-workflow/cadence-java-client/blob/master/LICENSE.txt) for details.
