@@ -140,3 +140,5 @@ To run:
     # register domain
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.common.RegisterDomain
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.spring.CadenceSamplesApplication
+
+Apache 2.0 License, please see [LICENSE](https://github.com/cadence-workflow/cadence-java-samples/blob/master/LICENSE.txt) for details.
