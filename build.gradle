@@ -61,6 +61,8 @@ compileJava {
 task execute(type: JavaExec) {
     main = findProperty("mainClass") ?: ""
     classpath = sourceSets.main.runtimeClasspath
+    jvmArgs += '--add-opens=java.base/java.lang=ALL-UNNAMED' // Upgrade to Java 21
+    jvmArgs += '--add-opens=java.base/java.time=ALL-UNNAMED' // Upgrade to Java 21
 }
 
 license {
