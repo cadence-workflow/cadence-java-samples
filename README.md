@@ -140,3 +140,7 @@ To run:
     # register domain
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.common.RegisterDomain
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.spring.CadenceSamplesApplication
+
+## Contributing
+
+We'd love your help in making Cadence great. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute.
