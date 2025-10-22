@@ -144,3 +144,6 @@ To run:
 ## Contributing
 
 We'd love your help in making Cadence great. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute.
+
+Apache 2.0 License, please see [LICENSE](https://github.com/cadence-workflow/cadence-java-samples/blob/master/LICENSE.txt) for details.
+
