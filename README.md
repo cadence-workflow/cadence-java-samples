@@ -1,4 +1,6 @@
 # Java Cadence Samples
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcadence-workflow%2Fcadence-java-samples.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcadence-workflow%2Fcadence-java-samples?ref=badge_shield)
+
 These samples demonstrate various capabilities of Java Cadence client and server. You can learn more about Cadence at:
 * [Cadence Service](https://github.com/uber/cadence)
 * [Cadence Java Client](https://github.com/uber/cadence-java-client)
@@ -142,3 +144,6 @@ To run:
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.spring.CadenceSamplesApplication
 
 Apache 2.0 License, please see [LICENSE](https://github.com/cadence-workflow/cadence-java-samples/blob/master/LICENSE.txt) for details.
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcadence-workflow%2Fcadence-java-samples.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcadence-workflow%2Fcadence-java-samples?ref=badge_large)
