@@ -37,7 +37,7 @@ repositories {
 
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.23.0")
-    implementation group: 'com.uber.cadence', name: 'cadence-client', version: '3.7.2'
+    implementation group: 'com.uber.cadence', name: 'cadence-client', version: '3.12.7'
     implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.9'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     implementation group: 'com.uber.m3', name: 'tally-core', version: '0.10.0'
