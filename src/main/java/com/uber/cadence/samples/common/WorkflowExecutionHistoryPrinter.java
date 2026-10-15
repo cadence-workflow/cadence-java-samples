@@ -47,6 +47,7 @@ public class WorkflowExecutionHistoryPrinter {
     String runId = args[1];
     workflowExecution.setRunId(runId);
     System.out.println(
-        WorkflowExecutionUtils.prettyPrintHistory(cadenceService, DOMAIN, workflowExecution, true));
+        WorkflowExecutionUtils.prettyPrintHistory(
+            WorkflowExecutionUtils.getHistory(cadenceService, DOMAIN, workflowExecution), true));
   }
 }
