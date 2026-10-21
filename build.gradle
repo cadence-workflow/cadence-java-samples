@@ -2,7 +2,7 @@ plugins {
     id 'com.github.hierynomus.license' version '0.16.1'
     id "com.github.sherter.google-java-format" version "0.9"
     id "net.ltgt.errorprone" version "3.1.0"
-    id 'org.springframework.boot' version '2.7.15'
+    id 'org.springframework.boot' version '2.7.18'
 }
 
 apply plugin: 'java'
@@ -38,7 +38,8 @@ repositories {
 dependencies {
     errorprone("com.google.errorprone:error_prone_core:2.23.0")
     implementation group: 'com.uber.cadence', name: 'cadence-client', version: '3.12.7'
-    implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.9'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     implementation group: 'com.uber.m3', name: 'tally-core', version: '0.10.0'
     implementation group: 'com.uber.m3', name: 'tally-prometheus', version: '0.10.0'
@@ -47,7 +48,7 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
     testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     testImplementation group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter'
 }
 
 compileJava {
