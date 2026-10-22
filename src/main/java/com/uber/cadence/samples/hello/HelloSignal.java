@@ -34,7 +34,7 @@ import com.uber.cadence.workflow.WorkflowMethod;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Demonstrates asynchronous signalling of a workflow. Requires a local instance of Cadence server
