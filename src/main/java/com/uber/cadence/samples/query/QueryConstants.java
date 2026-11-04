@@ -53,4 +53,7 @@ public final class QueryConstants {
 
   /** Registered workflow type for {@link OrderFulfillmentWorkflow}. */
   public static final String ORDER_FULFILLMENT_WORKFLOW_TYPE = "OrderFulfillmentWorkflow";
+
+  /** Registered workflow type for {@link ExpenseReportWorkflow}. */
+  public static final String EXPENSE_REPORT_WORKFLOW_TYPE = "ExpenseReportWorkflow";
 }

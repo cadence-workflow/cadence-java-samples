@@ -141,8 +141,9 @@ Starters (pick one per run):
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.query.MarkdownQueryStarter
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.query.LunchVoteStarter
     ./gradlew -q execute -PmainClass=com.uber.cadence.samples.query.OrderFulfillmentStarter
+    ./gradlew -q execute -PmainClass=com.uber.cadence.samples.query.ExpenseReportStarter
 
-In Cadence Web, open the workflow → **Query** tab → run query **`Signal`**, **`options`**, or **`dashboard`** (matching the starter you used).
+In Cadence Web, open the workflow → **Query** tab → run query **`Signal`**, **`options`**, or **`dashboard`** (matching the starter you used). For `ExpenseReportStarter`, open the workflow's **Home** tab instead (Cadence Web with `CADENCE_WORKFLOW_HOME_ENABLED=true`).
 
 ### DataConverter Samples
 

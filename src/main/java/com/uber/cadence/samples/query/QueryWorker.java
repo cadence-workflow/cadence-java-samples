@@ -45,7 +45,8 @@ public final class QueryWorker {
     worker.registerWorkflowImplementationTypes(
         MarkdownQueryWorkflow.WorkflowImpl.class,
         LunchVoteWorkflow.WorkflowImpl.class,
-        OrderFulfillmentWorkflow.WorkflowImpl.class);
+        OrderFulfillmentWorkflow.WorkflowImpl.class,
+        ExpenseReportWorkflow.WorkflowImpl.class);
     worker.registerActivitiesImplementations(
         new MarkdownQueryWorkflow.MarkdownQueryActivitiesImpl());
 
