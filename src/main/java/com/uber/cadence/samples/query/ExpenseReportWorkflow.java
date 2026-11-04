@@ -26,6 +26,8 @@ import static com.uber.cadence.samples.query.ExpenseReportModels.STATUS_REJECTED
 import static com.uber.cadence.samples.query.QueryConstants.EXPENSE_REPORT_WORKFLOW_TYPE;
 import static com.uber.cadence.samples.query.QueryConstants.TASK_LIST;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.uber.cadence.workflow.QueryMethod;
 import com.uber.cadence.workflow.SignalMethod;
 import com.uber.cadence.workflow.Workflow;
@@ -81,6 +83,7 @@ public final class ExpenseReportWorkflow {
     private static final DateTimeFormatter TIME_FMT =
         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneOffset.UTC);
     private static final Duration REVIEW_TIMEOUT = Duration.ofHours(1);
+    private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
     private ExpenseReportModels.ExpenseReport report = new ExpenseReportModels.ExpenseReport();
     private final ExpenseReportModels.ExpenseDecision decision =
@@ -249,9 +252,9 @@ public final class ExpenseReportWorkflow {
         md.append(
             String.format(
                 Locale.US,
-                "{%% signal signalName=\"approve\" label=\"✓ Approve %s\" "
+                "{%% signal signalName=\"approve\" label=%s "
                     + "input={\"reviewer\":\"finance-ops\",\"comment\":\"Looks good\"} /%%}\n",
-                money(decision.requestedAmount, currency)));
+                markdocString("✓ Approve " + money(decision.requestedAmount, currency))));
         md.append(
             String.format(
                 Locale.US,
@@ -280,18 +283,22 @@ public final class ExpenseReportWorkflow {
       md.append(
           String.format(
               Locale.US,
-              "{%% workflows query=\"WorkflowType = '%s' AND WorkflowID != '%s'\" "
+              "{%% workflows query=%s "
                   + "columns=\"WorkflowID,CloseStatus,CustomKeywordField,StartTime,CloseTime\" /%%}\n",
-              EXPENSE_REPORT_WORKFLOW_TYPE,
-              workflowId));
+              markdocString(
+                  "WorkflowType = '"
+                      + EXPENSE_REPORT_WORKFLOW_TYPE
+                      + "' AND WorkflowID != '"
+                      + workflowId
+                      + "'")));
 
       md.append("\n---\n\n### New report\n\n");
       md.append(
           String.format(
               Locale.US,
               "{%% input-field name=\"newAmount\" "
-                  + "label=\"Amount for the new receipt (%s)\" type=\"number\" required=true /%%}\n\n",
-              currency));
+                  + "label=%s type=\"number\" required=true /%%}\n\n",
+              markdocString("Amount for the new receipt (" + currency + ")")));
       md.append(
           String.format(
               Locale.US,
@@ -301,15 +308,15 @@ public final class ExpenseReportWorkflow {
                   + "\ttaskList=\"%s\"\n"
                   + "\tsdkLanguage=\"JAVA\"\n"
                   + "\ttimeoutSeconds=7200\n"
-                  + "\tinput={\"employee\":\"%s\",\"department\":\"%s\",\"currency\":\"%s\","
+                  + "\tinput={\"employee\":%s,\"department\":%s,\"currency\":%s,"
                   + "\"items\":[{\"description\":\"Team lunch\",\"category\":\"Meals\","
                   + "\"amount\":$newAmount}]}\n"
                   + "/%%}\n",
               EXPENSE_REPORT_WORKFLOW_TYPE,
               TASK_LIST,
-              report.employee,
-              report.department,
-              currency));
+              markdocString(report.employee),
+              markdocString(report.department),
+              markdocString(currency)));
       return md.toString();
     }
 
@@ -324,6 +331,14 @@ public final class ExpenseReportWorkflow {
     /** Stops user text from adding Markdoc tags. Markdown shows {@code &#123;} as "{". */
     private static String escapeTags(String s) {
       return s == null ? "" : s.replace("{%", "&#123;%");
+    }
+
+    /**
+     * Quotes s as a Markdoc string. Markdoc reads JSON string escapes, so report text can't end the
+     * tag.
+     */
+    private static String markdocString(String s) {
+      return GSON.toJson(s);
     }
 
     private static String getStatusBadge(String status) {

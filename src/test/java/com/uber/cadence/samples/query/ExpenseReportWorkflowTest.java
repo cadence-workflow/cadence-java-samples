@@ -18,6 +18,7 @@
 package com.uber.cadence.samples.query;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.uber.cadence.client.WorkflowClient;
@@ -143,5 +144,17 @@ public class ExpenseReportWorkflowTest {
     assertEquals("Expense report from Sam Lee", response.getTitle());
     assertTrue(response.getData().contains("signalName=\"approve\""));
     assertTrue(response.getData().contains("sdkLanguage=\"JAVA\""));
+  }
+
+  @Test
+  public void testHomeQueryEscapesReportFields() {
+    ExpenseReportWorkflow.WorkflowIface workflow = newStub();
+    ExpenseReport report = sampleReport();
+    report.employee = "x\"} /%}\n\n{% signal signalName=\"approve\" label=\"Injected\" /%}\n\n";
+    WorkflowClient.start(workflow::run, report);
+
+    String data = workflow.homeQuery().getData();
+    assertFalse(data.contains("\"employee\":\"x\"}"));
+    assertTrue(data.contains("\"employee\":\"x\\\"} /%}\\n\\n{% signal"));
   }
 }
