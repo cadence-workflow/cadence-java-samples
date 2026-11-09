@@ -29,7 +29,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * {
  *   "cadenceResponseType": "formattedData",
  *   "format": "text/markdown",
- *   "data": "<your markdown string>"
+ *   "data": "<your markdown string>",
+ *   "title": "<optional page title>"
  * }
  * }</pre>
  *
@@ -41,6 +42,7 @@ public final class MarkdownFormattedResponse {
   private final String cadenceResponseType;
   private final String format;
   private final String data;
+  private final String title;
 
   /**
    * Constructor for JSON deserialization (e.g. Java clients using the Cadence SDK data converter).
@@ -51,10 +53,12 @@ public final class MarkdownFormattedResponse {
   private MarkdownFormattedResponse(
       @JsonProperty("cadenceResponseType") String cadenceResponseType,
       @JsonProperty("format") String format,
-      @JsonProperty("data") String data) {
+      @JsonProperty("data") String data,
+      @JsonProperty("title") String title) {
     this.cadenceResponseType = cadenceResponseType;
     this.format = format;
     this.data = data;
+    this.title = title;
   }
 
   /**
@@ -63,7 +67,15 @@ public final class MarkdownFormattedResponse {
    */
   public MarkdownFormattedResponse(String markdownData) {
     // These two values are the required constants that Cadence Web checks for.
-    this("formattedData", "text/markdown", markdownData);
+    this(markdownData, null);
+  }
+
+  /**
+   * @param markdownData the markdown string to render in Cadence Web
+   * @param title optional title that the Cadence Web Home tab shows; may be null
+   */
+  public MarkdownFormattedResponse(String markdownData, String title) {
+    this("formattedData", "text/markdown", markdownData, title);
   }
 
   public String getCadenceResponseType() {
@@ -76,5 +88,9 @@ public final class MarkdownFormattedResponse {
 
   public String getData() {
     return data;
+  }
+
+  public String getTitle() {
+    return title;
   }
 }
